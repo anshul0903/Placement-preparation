@@ -22,3 +22,5 @@ int main()
 
     return 0;
 }
+//input- 5 2
+//output- 25
