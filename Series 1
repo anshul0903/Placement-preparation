@@ -1,0 +1,24 @@
+#include<stdio.h>
+
+int main()
+{
+    int diff,n,i,res;
+    scanf("%d",&n);
+    int a=6,b=9;
+    printf("%d %d ",a,b);
+    n=n-2;    //n-2 is done because we want while loop to run n-2 times as already 2 input are 6 &9
+    while(n--)  //it will run three times for remaining 3 o/p when n=5
+    {
+        diff=b-a;            //difference is calculated and we can see that differnece between 
+        diff=diff+2;    // two numbers is 2 [as it goes on series 3 5 7 9..]-the difference series
+        res=b+diff;         //so we added the diff with the result and printed it and replaced
+        printf("%d ",res);  //the values of a nd b.
+        a=b;
+        b=res;
+    }
+	return 0;
+}
+
+INPUT:5
+OUTPUT:
+6 9 14 21 30
