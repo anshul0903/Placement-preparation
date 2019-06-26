@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    char ch[10],r[10];
+    scanf("%s",ch);
+    int i=0,j=strlen(ch);
+
+    while(j>=0)
+    {
+        r[i]=ch[j-1];
+        i++;
+        j--;
+    }
+    r[i]='\0';
+    printf("The reversed string is %s",r);
+    return 0;
+}
+
+**************************************************
+#include<stdio.h>
+#include<string.h>
+
+int main()
+{
+    char ch[10];
+    gets(ch);           // takes the whole string with underline
+    printf("%s",strrev(ch));
+    }
