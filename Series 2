@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main()
+{
+    int n,i,j,count,fact;
+    scanf("%d",&n);
+        for(i=101,count=1;count<=n;i++)
+        {
+            fact=0;
+            for(j=1;j<=i;j++)
+            {
+                if(i%j==0)
+                {
+                fact++;
+                }
+            }
+            if(fact==2)
+            {
+                printf("%d ",i);
+                count++;
+            }
+        }
+	return 0;
+}
+
+Input:
+8
+Output:
+101 103 107 109 113 127 131 137
