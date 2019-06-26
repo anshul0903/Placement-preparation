@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+char res[50];
+
+void rec(char a[],int n,int i)
+{
+    if(n>=0)
+    {
+    res[i]=a[n-1];
+    n--;
+    i++;
+    rec(a,n,i);
+    }
+    else
+    {
+        res[i]='\0';
+    }
+
+}
+
+int main()
+{
+    char a[50];
+    scanf("%s",a);
+    int n=strlen(a);
+    rec(a,n,0);
+    printf("%s",res);
+    return 0;
+}
