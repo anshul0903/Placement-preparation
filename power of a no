@@ -1,0 +1,24 @@
+#include<stdio.h>
+
+int rec(int n,int a)
+{
+    static int r=1;
+    if(a==0)
+    return r;
+    else if(a>0)
+    {
+       r=r*n;
+       a--;
+       rec(n,a);
+    }
+}
+
+int main()
+{
+    int n,a,res;
+    scanf("%d%d",&n,&a);
+    res=rec(n,a);
+    printf("%d",res);
+
+    return 0;
+}
