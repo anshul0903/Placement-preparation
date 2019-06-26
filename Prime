@@ -1,0 +1,28 @@
+#include<stdio.h>
+int count=0;
+int prime_num(int n,int i);
+int main()
+{
+    int n,p;
+    scanf("%d",&n);
+    p=prime_num(n,1);
+    if(p==1)
+    printf("%d is a prime number",n);
+    else
+    printf("%d is not a prime number",n);
+    return 0;
+}
+int prime_num(int n,int i)
+{
+    if(i==n)
+    return count;
+    else
+    {
+        if(n%i==0)
+        count++;
+        i++;
+        prime_num(n,i);
+    }
+}
+//input- 13
+//output- 13 is not prime
