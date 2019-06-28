@@ -65,14 +65,18 @@ void display()
 void delete(int x)
 {
     struct node *ptr,*preptr;
-    ptr=start;
     if(start->data==x)
     {
+    ptr=start;
+    while(ptr->next!=start)
+    ptr=ptr->next;
+    ptr->next=start->next;
+    free(start);
     start=start->next;
-    free(ptr);
     }
     else
     {
+        ptr=start;
         while(ptr->data!=x)
         {
             preptr=ptr;
@@ -82,4 +86,3 @@ void delete(int x)
         free(ptr);
     }
 }
-    
