@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int n);
+void display();
+void delete(int x);
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        create(n);
+    }
+    display();
+    int x;
+    scanf("%d",&x);
+    delete(x);
+    printf("\n");
+    display();
+
+	return 0;
+}
+
+void create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        start=new_node;
+        new_node->next=start;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=start)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=new_node;
+        new_node->next=start;
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr->next!=start)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+    printf("%d",ptr->data);
+}
+void delete(int x)
+{
+    struct node *ptr,*preptr;
+    ptr=start;
+    if(start->data==x)
+    {
+    start=start->next;
+    free(ptr);
+    }
+    else
+    {
+        while(ptr->data!=x)
+        {
+            preptr=ptr;
+            ptr=ptr->next;
+        }
+        preptr->next=ptr->next;
+        free(ptr);
+    }
+}
+    
