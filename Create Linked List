@@ -1,0 +1,178 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+// Singly Linked list ;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int n);
+void display();
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        create(n);
+    }
+    display();
+    
+	return 0;
+}
+
+void create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+***********************************OR********************************************************
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+// Singly Linked list ;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+struct node *create(int n);
+struct node *display();
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        start=create(n);
+    }
+    display();
+    
+	return 0;
+}
+
+struct node *create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+    return start;
+}
+struct node *display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+    return start;
+}
+******************************CPP USING CLASS*********************************************
+
+NOTE: IN CPP USING CLASS POINTER SHOULD BE NEAR NODE(FOR EXAMPLE) AND NOT NEAR VARIABLE
+EX: NODE* NEXT;  & NOT NODE *NEXT;
+
+AND FOR CPP PROGRAM WITHOUT USING CLASS ITS SAME AS C PRGM JUST ABOVE STEP IS REQUIRED
+
+ACTUALLY IT WORKS FINE IN C SO NO PROBLEM U CAN PLACE '*' EITHER SIDE IN C
+
+#include <iostream>
+using namespace std;
+class node
+{
+    public:   // DEFAULT ACCES SPECIFIER IS PRIVATE SO NEED TO GIVE PUBLIC
+    int data;
+    node* next;
+};
+node* start=NULL;
+void create(int n);
+void display();
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        create(n);
+    }
+    display();
+    
+	return 0;
+}
+
+void create(int n)
+{
+    node* ptr;
+    node* new_node= new node();
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    node* ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+
