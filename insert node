@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+// Singly Linked list ;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int n);
+void display();
+struct node *insert_end(struct node **start,int r);
+void insert_after(int a,int b);
+int main()
+{
+    int t,n,a,b;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        create(n);
+    }
+    display();
+    printf("\n");
+    scanf("%d",&a); //after which node
+    scanf("%d",&b); //the value of the node
+    insert_after(a,b);
+    display();
+    
+	return 0;
+}
+
+void create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+struct node *insert_end(struct node **start,int r)          //At the end
+{
+    struct node *ptr,*new_node;
+    ptr=(*start);
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=r;
+    while(ptr->next!=NULL)
+    ptr=ptr->next;
+    ptr->next=new_node;
+    new_node->next=NULL;
+    return (*start);
+  
+}
+
+void insert_after(int a,int b)                            //After the given node
+{
+    struct node *ptr,*new_node,*preptr;
+    preptr=start;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=b;
+    while(preptr->data!=a)
+    {
+        preptr=preptr->next;
+        ptr=preptr;
+    }
+    ptr=ptr->next;
+    preptr->next=new_node;
+    new_node->next=ptr;
+    
+}
+
+
