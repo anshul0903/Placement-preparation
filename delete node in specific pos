@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+// circular Linked list ;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int n);
+void display();
+void delete_pos(int x);
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        create(n);
+    }
+    int x;
+    scanf("%d",&x);
+    delete_pos(x);
+    display();
+
+	return 0;
+}
+
+void create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        start=new_node;
+        new_node->next=start;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=start)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=new_node;
+        new_node->next=start;
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr->next!=start)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+    printf("%d",ptr->data); 
+}
+
+void delete_pos(int x)
+{
+    struct node *ptr,*preptr;
+    int pos=1;
+    ptr=start;
+    if(x==0)
+    {
+        while(ptr->next!=start)
+        ptr=ptr->next;
+        ptr->next=start->next;
+        free(start);
+        start=start->next;
+    }
+    else 
+    {
+        while(ptr->next!=start)
+        {
+            preptr=ptr;
+            ptr=ptr->next;
+            if(pos==x)
+            {
+                preptr->next=ptr->next;
+                free(ptr);
+                break;
+            }
+            else
+            pos++;
+        }
+    }
+}
