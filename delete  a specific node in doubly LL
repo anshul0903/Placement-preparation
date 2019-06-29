@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+// doubly Linked list ;
+struct node
+{
+    struct node *prev;
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int n);
+void display();
+void delete_pos(int x);
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        create(n);
+    }
+    int x;
+    scanf("%d",&x);
+    delete_pos(x);
+    display();
+
+	return 0;
+}
+
+void create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        start=new_node;
+        new_node->prev=NULL;
+        new_node->next=NULL;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        {
+            ptr=ptr->next;
+        }
+        ptr->next=new_node;
+        new_node->prev=ptr;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+void delete_pos(int x)
+{
+    struct node *ptr,*preptr;
+    int pos=1;
+    ptr=start;
+    if(x==0)
+    {
+        free(start);
+        start=start->next;
+        start->prev=NULL;
+    }
+    else 
+    {
+        while(ptr!=NULL)
+        {
+            preptr=ptr;
+            ptr=ptr->next;
+            if(pos==x)
+            {
+                preptr->next=ptr->next;
+                if(ptr->next!=NULL)       //we give here if cndtn coz if ptr->next==NULL then no use of
+                ptr->next->prev=preptr;   //assigning NULL->prev so that cndtn is used.
+                free(ptr);
+                break;
+            }
+            else 
+            pos++;
+        }
+    }
+}
