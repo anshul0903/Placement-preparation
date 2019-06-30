@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <malloc.h>
+#include <stdlib.h>
+// Singly Linked list ;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int n);
+void display();
+int n_node(struct node *start,int a);
+int main()
+{
+    int t,n,a;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        create(n);
+    }
+    display();
+    printf("\n");
+    scanf("%d",&a);
+    printf("%d",n_node(start,a));
+    
+    
+	return 0;
+}
+
+void create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+int n_node(struct node *start,int a)
+{
+    struct node *ptr;
+    ptr=start;
+    int count=0,b=0;
+    while(ptr!=NULL)
+    {
+        count++;
+        ptr=ptr->next;
+    }
+    int len=count-a;
+    ptr=start;
+    while(b<len)
+    {
+        ptr=ptr->next;
+        b++;
+    }
+    return (ptr->data);
+    
+}
