@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <malloc.h>
+#include <stdlib.h>
+// Singly Linked list ;
+struct node
+{
+    int data;
+    struct node *next;
+};
+struct node *start=NULL;
+void create(int n);
+void display();
+bool search(struct node *start,int a);
+int main()
+{
+    int t,n,a;
+    scanf("%d",&t);
+    while(t--)
+    {
+        scanf("%d",&n);
+        create(n);
+    }
+    display();
+    printf("\n");
+    scanf("%d",&a);
+    if(search(start,a))
+    printf("The Number is Present");
+    else
+    printf("The Number is not Present");
+    
+    
+	return 0;
+}
+
+void create(int n)
+{
+    struct node *ptr,*new_node;
+    new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    struct node *ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+bool search(struct node *start,int a)
+{
+    if(start==NULL)
+    return false;
+    else if(start->data==a)
+    return true;
+    return search(start->next,a);
+}
