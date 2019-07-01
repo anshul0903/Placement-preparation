@@ -51,3 +51,72 @@ int main()
     
 	return 0;
 }
+********************************************************************************************
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node* next;
+};
+node* start=NULL;
+bool isPalindrome()
+{
+    node* ptr=start;
+    stack<int> s;
+    while(ptr!=NULL)
+    {
+        s.push(ptr->data);
+        ptr=ptr->next;
+    }
+    int i;
+    while(start!=NULL)
+    {
+        i=s.top();
+        s.pop();
+        if(start->data!=i)
+        return false;
+        start=start->next;
+    }
+    return true;
+}
+void create(int n)
+{
+    node* ptr;
+    node* new_node=new node();
+    new_node->data=n;
+    if(start==NULL)
+    {
+    new_node->next=NULL;
+    start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+    
+}
+
+int main()
+{
+ int t,n;
+ cin>>t;
+ while(t--)
+ {
+     cin>>n;
+     create(n);
+ }
+ if(isPalindrome())
+ cout<<"Number is Palindrome";
+ else
+ cout<<"Number isnt Palindrome";
+    
+	return 0;
+}
