@@ -40,9 +40,9 @@ int main()
  node one=node(1);    //calling constructor
  node two=node(2);
  node three=node(1);
- three.next=NULL;
- one.next=&two;       //assigning links between them
- two.next=&three;
+ three.next=NULL;	//assigning links between them
+ one.next=&two;       	//Here . is used instead of -> coz the base type of the operator must be operator
+ two.next=&three;	// and here one two three arent pointers type. so dot(.) is used to acces data from the class
  node *start=&one;
  if(isPalindrome(start))
  cout<<"Number is Palindrome";
