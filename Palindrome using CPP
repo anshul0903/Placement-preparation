@@ -1,0 +1,53 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node(int d)   //constructor
+    {
+    data=d;
+    }
+    node* next;
+};
+
+bool isPalindrome(node* start)
+{
+    node* ptr=start;
+    stack<int> s;
+    while(ptr!=NULL)
+    {
+        s.push(ptr->data);
+        ptr=ptr->next;
+    }
+    int i;
+    while(start!=NULL)
+    {
+        i=s.top();
+        s.pop();
+        if(start->data!=i)
+        return false;
+        start=start->next;
+    }
+    return true;
+}
+
+
+int main()
+{
+ node one=node(1);    //calling constructor
+ node two=node(2);
+ node three=node(1);
+ three.next=NULL;
+ one.next=&two;       //assigning links between them
+ two.next=&three;
+ node *start=&one;
+ if(isPalindrome(start))
+ cout<<"Number is Palindrome";
+ else
+ cout<<"Number isnt Palindrome";
+    
+	return 0;
+}
