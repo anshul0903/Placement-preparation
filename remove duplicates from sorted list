@@ -63,19 +63,14 @@ void rem_dup()
     ptr=start;
     while(ptr->next!=NULL)
     {
-        pptr=ptr;
-        while(pptr->next!=NULL)
-        {
-            if(ptr->data==pptr->next->data)
+            if(ptr->data==ptr->next->data)
             {
-                dup=pptr->next;
-                next_n=pptr->next->next;
-                pptr->next=next_n;
+                dup=ptr->next;
+                next_n=ptr->next->next;
+                ptr->next=next_n;
                 free(dup);
             }
             else
-            pptr=pptr->next;
-        }
         ptr=ptr->next;
     }
 }
