@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+node *start=NULL;
+void create(int n);
+void display();
+void swap(int p,int q);
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+       scanf("%d",&n);
+       create(n);
+    }
+    display();
+    int p,q;
+    scanf("%d%d",&p,&q);
+    swap(p,q);
+    printf("\n");
+    display();
+    
+	return 0;
+}
+
+void create(int n)
+{
+    node *ptr;
+    node *new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    node* ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+void swap(int p,int q)
+{
+    if(p==q)
+    return;
+    node *x,*px=NULL,*y,*py=NULL,*temp;
+    x=start;
+    y=start;
+    while(x && x->data!=p)
+    {
+        px=x;
+        x=x->next;
+    }
+    while(y && y->data!=q)
+    {
+        py=y;
+        y=y->next;
+    }
+    if(px!=NULL)
+    px->next=y;
+    else
+    start=x;
+    if(py!=NULL)
+    py->next=x;
+    else
+    start=y;
+    temp=y->next;
+    y->next=x->next;
+    x->next=temp;
+    
+}
