@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+}node;
+node *start=NULL;
+void create(int n);
+void display();
+void rem_dup();
+int main()
+{
+    int t,n;
+    scanf("%d",&t);
+    while(t--)
+    {
+       scanf("%d",&n);
+       create(n);
+    }
+    display();
+    rem_dup();
+    printf("\n");
+    display();
+    
+	return 0;
+}
+
+void create(int n)
+{
+    node *ptr;
+    node *new_node=(struct node*)malloc(sizeof(struct node));
+    new_node->data=n;
+    if(start==NULL)
+    {
+        new_node->next=NULL;
+        start=new_node;
+    }
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+        new_node->next=NULL;
+    }
+}
+void display()
+{
+    node* ptr;
+    ptr=start;
+    while(ptr!=NULL)
+    {
+        printf("%d->",ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+void rem_dup()
+{
+    struct node *ptr,*pptr,*next_n,*dup;
+    ptr=start;
+    while(ptr->next!=NULL)
+    {
+        pptr=ptr;
+        while(pptr->next!=NULL)
+        {
+            if(ptr->data==pptr->next->data)
+            {
+                dup=pptr->next;
+                next_n=pptr->next->next;
+                pptr->next=next_n;
+                free(dup);
+            }
+            else
+            pptr=pptr->next;
+        }
+        ptr=ptr->next;
+    }
+}
