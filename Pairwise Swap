@@ -1,0 +1,53 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+
+class node
+{
+    public:
+    int data;
+    node* next;
+};
+
+void pairWiseSwap(node* start) 
+{ 
+    node* temp = start; 
+    while (temp != NULL && temp->next != NULL)
+    { 
+        swap(temp->data,temp->next->data); 
+        temp = temp->next->next; 
+    } 
+} 
+
+void push(node** start,int d)
+{
+    node* new_node=new node();
+    new_node->data=d;
+    new_node->next=(*start);
+    (*start)=new_node;
+}
+
+void display(node* start)
+{
+    while(start!=NULL)
+    {
+        cout<<start->data<<"->";
+        start=start->next;
+    }
+}
+
+int main()
+{
+    node* start=NULL;
+    push(&start, 5); 
+    push(&start, 4); 
+    push(&start, 3); 
+    push(&start, 2); 
+    push(&start, 1); 
+  
+    display(start);
+    pairWiseSwap(start);
+    cout<<endl;
+    display(start);
+    
+	return 0;
+}
