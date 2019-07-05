@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node *tree=NULL;
+
+void insert(int n)
+{
+    struct node *new_node= new node();
+    struct node *nodeptr,*parentptr;
+    new_node->data=n;
+    new_node->left=NULL;
+    new_node->right=NULL;
+    if(tree==NULL)
+    {
+    tree=new_node;
+    tree->left=NULL;
+    tree->right=NULL;
+    }
+    else
+    {
+        parentptr=NULL;
+        nodeptr=tree;
+        while(nodeptr!=NULL)
+        {
+            parentptr=nodeptr;
+            if(n<nodeptr->data)
+            nodeptr=nodeptr->left;
+            else
+            nodeptr=nodeptr->right;
+        }
+        if(n<parentptr->data)
+        parentptr->left=new_node;
+        else
+        parentptr->right=new_node;
+    }
+}
+
+void preorder(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    cout<<tree->data<<" ";
+    preorder(tree->left);
+    preorder(tree->right);
+    }
+}
+
+void inorder(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    inorder(tree->left);
+    cout<<tree->data<<" ";
+    inorder(tree->right);
+    }
+}
+
+void postorder(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    postorder(tree->left);
+    postorder(tree->right);
+    cout<<tree->data<<" ";
+    }
+}
+
+
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        insert(n);
+    }
+    preorder(tree);
+    cout<<endl;
+    inorder(tree);
+    cout<<endl;
+    postorder(tree);
+    
+	return 0;
+}
