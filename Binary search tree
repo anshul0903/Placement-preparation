@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 struct node
@@ -71,7 +72,22 @@ void postorder(struct node *tree)
     cout<<tree->data<<" ";
     }
 }
-
+void levelorder()
+{
+    struct node *ptr;
+    queue <struct node *> q;
+    q.push(tree);
+    while(!q.empty())
+    {
+        ptr=q.front();
+        cout<<ptr->data<<" ";
+        q.pop();
+        if(ptr->left!=NULL)
+        q.push(ptr->left);
+        if(ptr->right!=NULL)
+        q.push(ptr->right);
+    }
+}
 
 int main()
 {
@@ -82,11 +98,14 @@ int main()
         cin>>n;
         insert(n);
     }
+    cout<<"preorder"<<endl;
     preorder(tree);
-    cout<<endl;
+    cout<<"\ninorder"<<endl;
     inorder(tree);
-    cout<<endl;
+    cout<<"\npostorder"<<endl;
     postorder(tree);
+    cout<<"\nLevelorder"<<endl;
+    levelorder();
     
 	return 0;
 }
