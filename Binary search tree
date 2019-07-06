@@ -89,6 +89,22 @@ void levelorderBFS()
     }
 }
 
+bool search(struct node *tree,int s)
+{
+    if(tree==NULL)
+    return false;
+    else if(tree->data==s)
+    return true;
+    else
+    {
+    if(s<tree->data)
+    search(tree->left,s);
+    else
+    search(tree->right,s);
+    }
+}
+
+
 int main()
 {
     int t,n;
@@ -106,6 +122,12 @@ int main()
     postorder(tree);
     cout<<"\nLevelorder"<<endl;
     levelorderBFS();
-    
+    int s;
+    cin>>s;
+    if(search(tree,s))
+    cout<<"\nElement is Present";
+    else
+    cout<<"\nElement isnt Present";
+
 	return 0;
 }
