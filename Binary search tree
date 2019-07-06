@@ -43,13 +43,13 @@ void insert(int n)
     }
 }
 
-void preorder(struct node *tree)
+void preorderDFS(struct node *tree)
 {
     if(tree!=NULL)
     {
     cout<<tree->data<<" ";
-    preorder(tree->left);
-    preorder(tree->right);
+    preorderDFS(tree->left);
+    preorderDFS(tree->right);
     }
 }
 
@@ -72,7 +72,7 @@ void postorder(struct node *tree)
     cout<<tree->data<<" ";
     }
 }
-void levelorder()
+void levelorderBFS()
 {
     struct node *ptr;
     queue <struct node *> q;
@@ -99,13 +99,13 @@ int main()
         insert(n);
     }
     cout<<"preorder"<<endl;
-    preorder(tree);
+    preorderDFS(tree);
     cout<<"\ninorder"<<endl;
     inorder(tree);
     cout<<"\npostorder"<<endl;
     postorder(tree);
     cout<<"\nLevelorder"<<endl;
-    levelorder();
+    levelorderBFS();
     
 	return 0;
 }
