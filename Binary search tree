@@ -104,6 +104,31 @@ bool search(struct node *tree,int s)
     }
 }
 
+void mirror(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+        mirror(tree->left);
+        mirror(tree->right);
+        swap(tree->left,tree->right);
+    }
+}
+
+int height(struct node *tree)
+{
+    int l,r;
+    if(tree==NULL)
+    return 0;
+    else
+    {
+        l=height(tree->left);
+        r=height(tree->right);
+        if(l>r)
+        return (l+1);
+        else
+        return (r+1);
+    }
+}
 
 int main()
 {
@@ -128,6 +153,9 @@ int main()
     cout<<"\nElement is Present";
     else
     cout<<"\nElement isnt Present";
-
+    mirror(tree);
+    cout<<"\nLevelorder"<<endl;
+    levelorderBFS();
+    cout<<"\nHEIGHT = "<<height(tree);
 	return 0;
 }
