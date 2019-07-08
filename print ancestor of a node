@@ -1,0 +1,88 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node *tree=NULL;
+
+void insert(int n)
+{
+    struct node *new_node= new node();
+    struct node *nodeptr,*parentptr;
+    new_node->data=n;
+    new_node->left=NULL;
+    new_node->right=NULL;
+    if(tree==NULL)
+    {
+    tree=new_node;
+    tree->left=NULL;
+    tree->right=NULL;
+    }
+    else
+    {
+        parentptr=NULL;
+        nodeptr=tree;
+        while(nodeptr!=NULL)
+        {
+            parentptr=nodeptr;
+            if(n<nodeptr->data)
+            nodeptr=nodeptr->left;
+            else
+            nodeptr=nodeptr->right;
+        }
+        if(n<parentptr->data)
+        parentptr->left=new_node;
+        else
+        parentptr->right=new_node;
+    }
+}
+
+void preorderDFS(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    cout<<tree->data<<" ";
+    preorderDFS(tree->left);
+    preorderDFS(tree->right);
+    }
+}
+
+
+int PrintAncestor(struct node *tree,int target)
+{
+    if(tree!=NULL)
+    {
+    if(tree->data==target)
+    return 1;
+    if(PrintAncestor(tree->left,target) || PrintAncestor(tree->right,target))
+    {
+    cout<<tree->data<<" ";
+    return 1;
+    }
+    }
+    return 0;
+}
+
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        insert(n);
+    }
+    cout<<"preorder"<<endl;
+    preorderDFS(tree);
+    cout<<endl;
+    int target;
+    cin>>target;
+    PrintAncestor(tree,target);
+	return 0;
+}
