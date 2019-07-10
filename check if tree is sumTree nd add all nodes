@@ -1,0 +1,98 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node *tree=NULL;
+
+void insert(int n)
+{
+    struct node *new_node= new node();
+    struct node *nodeptr,*parentptr;
+    new_node->data=n;
+    new_node->left=NULL;
+    new_node->right=NULL;
+    if(tree==NULL)
+    {
+    tree=new_node;
+    tree->left=NULL;
+    tree->right=NULL;
+    }
+    else
+    {
+        parentptr=NULL;
+        nodeptr=tree;
+        while(nodeptr!=NULL)
+        {
+            parentptr=nodeptr;
+            if(n<nodeptr->data)
+            nodeptr=nodeptr->left;
+            else
+            nodeptr=nodeptr->right;
+        }
+        if(n<parentptr->data)
+        parentptr->left=new_node;
+        else
+        parentptr->right=new_node;
+    }
+}
+
+void preorderDFS(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    cout<<tree->data<<" ";
+    preorderDFS(tree->left);
+    preorderDFS(tree->right);
+    }
+}
+
+int add(struct node *tree)
+{
+    if(tree!=NULL)
+        return (tree->data + add(tree->left) + add(tree->right));
+    return 0;
+}
+
+int sumTree(struct node *tree)
+{
+    if(tree==NULL)
+    return 1;
+    if(tree->left==NULL && tree->right==NULL)
+    return 1;
+    int ltree=add(tree->left);
+    int rtree=add(tree->right);
+    int total=ltree+rtree;
+    if(total==tree->data)
+    {
+        if(sumTree(tree->left) && sumTree(tree->right))
+        return 1;
+    }
+    return 0;
+}
+
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        insert(n);
+    }
+    cout<<"preorder"<<endl;
+    preorderDFS(tree);
+    cout<<endl;
+    cout<<add(tree);
+    if(sumTree(tree))
+    cout<<"\nYes";
+    else
+    cout<<"\nNo";
+	return 0;
+}
