@@ -19,11 +19,7 @@ void insert(int n)
     new_node->left=NULL;
     new_node->right=NULL;
     if(tree==NULL)
-    {
     tree=new_node;
-    tree->left=NULL;
-    tree->right=NULL;
-    }
     else
     {
         parentptr=NULL;
