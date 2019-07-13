@@ -1,0 +1,79 @@
+#include <iostream>
+#include <algorithm>
+#include <stack>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+int count=0;
+struct node *tree=NULL;
+void insert(int n)
+{
+    struct node *new_node= new node();
+    struct node *nodeptr,*parentptr;
+    new_node->data=n;
+    new_node->left=NULL;
+    new_node->right=NULL;
+    if(tree==NULL)
+    tree=new_node;
+    else
+    {
+        parentptr=NULL;
+        nodeptr=tree;
+        while(nodeptr!=NULL)
+        {
+            parentptr=nodeptr;
+            if(n<nodeptr->data)
+            nodeptr=nodeptr->left;
+            else
+            nodeptr=nodeptr->right;
+        }
+        if(n<parentptr->data)
+        parentptr->left=new_node;
+        else
+        parentptr->right=new_node;
+    }
+}
+stack<int> s;
+void print_stack()
+{
+    stack<int> :: iterator itr=s.top();
+    while(itr--)
+    {
+        cout<<(*itr);
+    }
+}
+void display_Root_To_LeafNodes(struct node *tree)
+{
+    if(tree==NULL)
+    return;
+    s.push(tree->data);
+    display_Root_To_LeafNodes(tree->left);
+    if(tree->left==NULL && tree->right==NULL)
+    {
+    print_stack();
+    cout<<endl;
+    s.pop();
+    }
+    display_Root_To_LeafNodes(tree->right);
+    
+}
+
+
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        insert(n);
+    }
+    display_Root_To_LeafNodes(tree);
+    
+	return 0;
+}
