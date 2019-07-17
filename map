@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
+
+int main()
+{
+	int t,n,i,j;
+	cin>>t>>n;
+	int a[t],b[t];
+	map<int,int,greater<int>> m;
+	for(i=0;i<t;i++)
+	{
+	    cin>>a[i];
+	}
+	for(i=0;i<t;i++)
+	{
+	    cin>>b[i];
+	}
+	for(i=0;i<t;i++)
+	{
+	    m.insert({a[i],b[i]});
+	}
+	map<int,int> :: iterator itr;
+	for(itr=m.begin();itr!=m.end();itr++)
+	{
+	    cout<<(*itr).first<<" ";
+	}
+	cout<<endl;
+	for(itr=m.begin();itr!=m.end();itr++)
+	{
+	    cout<<(*itr).second<<" ";
+	}
+	
+	return 0;
+}
