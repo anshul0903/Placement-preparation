@@ -1,0 +1,49 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main()
+{
+	int t,n,i,j;
+	cin>>t>>n;
+	int a[t],b[t];
+	map<int,int,greater<int>> m;
+	for(i=0;i<t;i++)
+	{
+	    cin>>a[i];
+	}
+	for(i=0;i<t;i++)
+	{
+	    cin>>b[i];
+	}
+	for(i=0;i<t;i++)
+	{
+	    m[a[i]]=b[i];
+	}
+	map<int,int> :: iterator itr,jtr;
+	for(itr=m.begin();itr!=m.end();itr++)
+	{
+	    cout<<(*itr).first<<" ";
+	}
+	cout<<endl;
+	for(itr=m.begin();itr!=m.end();itr++)
+	{
+	    cout<<(*itr).second<<" ";
+	}
+	int max;
+	for(itr=m.begin();itr!=m.end();itr++)
+	{
+	 for(jtr=itr++;jtr!=m.end();jtr++)
+	{   
+	    if(itr->second+jtr->second<=n)
+	    {
+	    max=itr->first+jtr->first;
+	    goto output;
+	    }
+	}
+	}
+	output:
+	cout<<"\n"<<max;
+	
+	return 0;
+}
