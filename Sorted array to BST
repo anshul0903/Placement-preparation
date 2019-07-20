@@ -1,0 +1,55 @@
+#include <iostream>
+#include <algorithm>
+#include <stack>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+
+
+struct node *insert(int d)
+{
+    struct node *new_node= new node();
+    new_node->data=d;
+    new_node->left=NULL;
+    new_node->right=NULL;
+    return (new_node);
+}
+    
+struct node *arrTree(int arr[],int start,int end)
+{
+    if(start>end)
+    return NULL;
+    int mid=(start+end)/2;
+    struct node *tree=insert(arr[mid]);
+    tree->left=arrTree(arr,start,mid-1);
+    tree->right=arrTree(arr,mid+1,end);
+    return tree;
+}
+
+void inorder(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    inorder(tree->left);
+    cout<<tree->data<<" ";
+    inorder(tree->right);
+    }
+}
+
+int main()
+{
+    int n,i;
+    cin>>n;
+    int arr[n];
+    for(i=0;i<n;i++)
+        cin>>arr[i];
+    struct node *tree=arrTree(arr,0,n-1);
+    inorder(tree);
+    return 0;
+}
