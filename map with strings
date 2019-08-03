@@ -1,0 +1,25 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main()
+{
+    int n;
+    cin>>n;
+    string x[20];
+    map<int,string> m;
+    int i=1;
+    while(n--)
+    {
+        cin>>x[i];
+        m[i]=x[i];
+        i++;
+    }
+    map<int,string> :: iterator itr;
+    for(itr=m.begin();itr!=m.end();itr++)
+    {
+        cout<<(*itr).first<<" ";
+        cout<<(*itr).second<<endl;
+    }
+	return 0;
+}
