@@ -1,0 +1,85 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+
+struct node *tree=NULL;
+
+void insert(int n)
+{
+    struct node *new_node= new node();
+    struct node *nodeptr,*parentptr;
+    new_node->data=n;
+    new_node->left=NULL;
+    new_node->right=NULL;
+    if(tree==NULL)
+    tree=new_node;
+    else
+    {
+        parentptr=NULL;
+        nodeptr=tree;
+        while(nodeptr!=NULL)
+        {
+            parentptr=nodeptr;
+            if(n<nodeptr->data)
+            nodeptr=nodeptr->left;
+            else
+            nodeptr=nodeptr->right;
+        }
+        if(n<parentptr->data)
+        parentptr->left=new_node;
+        else
+        parentptr->right=new_node;
+    }
+}
+
+void preorderDFS(struct node *tree)
+{
+    if(tree!=NULL)
+    {
+    cout<<tree->data<<" ";
+    preorderDFS(tree->left);
+    preorderDFS(tree->right);
+    }
+}
+
+void display()
+{
+    stack<struct node *>s;
+    while(1)
+    {
+    while(tree)
+    {
+        s.push(tree);
+        cout<<tree->data<<" ";
+        tree=tree->left;
+    }
+        if(s.empty())
+        break;
+        tree=s.top();
+        s.pop();
+        tree=tree->right;
+    }
+}
+
+int main()
+{
+    int t,n;
+    cin>>t;
+    while(t--)
+    {
+        cin>>n;
+        insert(n);
+    }
+    cout<<"preorder"<<endl;
+    preorderDFS(tree);
+    cout<<endl;
+    display();
+    return 0;
+}
