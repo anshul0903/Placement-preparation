@@ -1,0 +1,86 @@
+
+
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node* next;
+};
+node* start=NULL;
+node* create(int n)
+{
+    node* ptr;
+    node* new_node= new node();
+    new_node->data=n;
+    new_node->next=NULL;
+    if(start==NULL)
+    start=new_node;
+    else
+    {
+        ptr=start;
+        while(ptr->next!=NULL)
+        ptr=ptr->next;
+        ptr->next=new_node;
+    }
+    return new_node;
+}
+
+void rev(stack<int>* s)
+{
+    while(!s->empty())
+    {
+        create(s->top());
+        s->pop();
+    }
+    
+}
+
+void reverse(int arr[],int t)
+{
+    int i;
+    stack<int> s;
+    for(i=0;i<t;i++)
+    {
+        if(arr[i]%2==0)
+        s.push(arr[i]);
+        else
+        {
+            if(!s.empty())
+            rev(&s);
+            create(arr[i]);
+        }
+    }
+    if(!s.empty())
+            rev(&s);
+}
+void display(node* start)
+{
+    while(start)
+    {
+        cout<<start->data<<" ";
+        start=start->next;
+    }
+}
+
+int main()
+{
+	int t,i;
+	cin >>t;
+	int arr[t];
+	for(i=0;i<t;i++)
+	cin>>arr[i];
+	reverse(arr,t);
+	display(start);
+}
+
+
+i/p
+9
+2 18 24 3 5 7 9 6 12
+o/p
+24 18 2 3 5 7 9 12 6 
