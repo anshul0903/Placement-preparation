@@ -1,0 +1,22 @@
+#include<bits/stdc++.h> 
+using namespace std;
+
+int main()
+{
+    int n,i;
+    string str;
+    cin>>str;
+    n=str.size();
+    map<char,int> m;
+    for(i=0;i<n;i++)
+    m[str[i]]++;
+    map<char,int> :: iterator itr;
+    for(itr=m.begin();itr!=m.end();itr++)
+        cout<<(*itr).first<<(*itr).second;
+	return 0;
+}
+******************************
+I/P:
+aabcdda
+O/P;
+a3b1c1d2
