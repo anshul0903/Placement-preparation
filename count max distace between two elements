@@ -1,0 +1,72 @@
+#include<bits/stdc++.h> 
+using namespace std;
+
+void maxCount(int arr[],int n)
+{
+    int count[n]={0};
+    unordered_map<int,int> m;
+    for(int i=0;i<n;i++)
+    {
+        if(m.find(arr[i])==m.end())     //Checking the first instant of the no.
+            m[arr[i]]=i;
+        else
+            count[m[arr[i]]]=max(count[m[arr[i]]],i-m[arr[i]]);
+    }
+    for(int i=0;i<n;i++)
+        if(count[i]!=0)
+        cout<<arr[i]<<" "<<count[m[arr[i]]]<<endl;
+}
+
+int main()
+{
+    int n,i;
+    cin>>n;
+    int arr[n];
+    for(i=0;i<n;i++)
+    cin>>arr[i];
+    maxCount(arr,n);
+	return 0;
+}
+*********
+I/p:
+12
+3 2 1 2 1 4 5 8 6 7 4 2
+O/p:
+2 10  //[the max distance between twos in the array is 10 and so on]
+1 2
+4 5
+
+*************************************************************************************
+
+#include<bits/stdc++.h> 
+using namespace std;
+
+int maxCount(int arr[],int n)
+{
+    int count[n]={0};
+    unordered_map<int,int> m;
+    for(int i=0;i<n;i++)
+    {
+        if(m.find(arr[i])==m.end())     //Checking the first instant of the no.
+            m[arr[i]]=i;
+        else
+            count=max(count,i-m[arr[i]]);
+    }
+    return count;
+}
+
+int main()
+{
+    int n,i;
+    cin>>n;
+    int arr[n];
+    for(i=0;i<n;i++)
+    cin>>arr[i];
+    cout<<maxCount(arr,n);
+	return 0;
+}
+I/p:
+12
+3 2 1 2 1 4 5 8 6 7 4 2
+O/p:
+10 //[max distance between any node in the array]
