@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+#include <algorithm>
+using namespace std;
+//Here we declare a unordered map with initial as 0 by using unordered_map<int,int>m{{0,0}}
+//and then we check no. is positive or negative nd then if -ve subtract -1 else add 1 
+//making resultant 0
+
+int findInteger(int arr[], int n) 
+{ 
+    unordered_map<int,int>m{{0,0}};
+    for(int i=0;i<n;i++)
+    {
+        if(arr[i]<0)
+        m[abs(arr[i])]-=-1;
+        else
+        m[arr[i]]+=1;
+    }
+    for(auto i:m)
+    if(i.second!=0)
+    return i.first;
+    return -1;
+}
+
+int main()
+{
+	int arr[]={ 1, 8, -6, -1, 6, 8 };;
+	int n = sizeof(arr) / sizeof(arr[0]); 
+    cout << findInteger(arr, n) << endl;
+	return 0;
+}
