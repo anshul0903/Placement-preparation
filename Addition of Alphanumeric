@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main()
+{
+    int i,n=0;
+    string str;
+    getline(cin,str);
+    for(i=0;i<str.length();i++)
+    {
+        if(str[i]>='0' && str[i]<='9')
+        {
+        n=n+(str[i]-'0');
+        }
+        else if(str[i]==' ')
+        {
+        continue;
+        }
+        else
+        {
+        n=n+str[i];
+        }
+    }
+    cout<<n;
+    
+	return 0;
+}
