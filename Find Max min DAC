@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct find {
+    int greater, smaller;
+};
+
+typedef struct find Struct;
+
+Struct fun(int *arr,int i,int j)
+{
+    Struct s,s1,s2;
+    if(i==j)
+    {
+        s.smaller=arr[i];
+        s.greater=arr[i];
+        return s;
+    }
+    if(i==j-1)
+    {
+        if(arr[i]>arr[j])
+        {
+            s.greater=arr[i];
+            s.smaller=arr[j];
+        }
+        else
+        {
+            s.greater=arr[j];
+            s.smaller=arr[i];
+        }
+        return s;
+    }
+    int mid=(i+j)/2;
+    s1=fun(arr, i, mid);
+    s2=fun(arr, mid+1, j);
+    if(s1.greater>s2.greater)
+    s.greater=s1.greater;
+    else
+    s.greater=s2.greater;
+    if(s1.smaller<s2.smaller)
+    s.smaller=s1.smaller;
+    else
+    s.smaller=s2.smaller;
+    return s;
+}
+int main() 
+{
+    Struct result;
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++)
+    cin>>arr[i];
+    result=fun(arr, 0,n-1);
+    cout<<result.greater<<endl<<result.smaller;
+	return 0;
+}
